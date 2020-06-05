@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   <meta charset="UTF-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <meta http-equiv="X-UA-Compatible" content="ie=edge">
+   <title>Accordion Media</title>
+   <link rel="stylesheet" href="style.css">
+</head>
+<body>
+   <div class="container">
+      <div id="media-list">
+         <h1>{{ title }}</h1>
+         <select value="" @change="filterList">
+            <option>Select a type of media...</option>
+            <option v-for="mediaType in uniqueMediaTypes">{{ mediaType }}</option>
+         </select>
+         <ul>
+            <li
+               v-show="type === '' || type === media.type" 
+               v-for="media in mediaList" 
+               @click="toggleDetails(media)"
+               :class="[media.showDetail ? 'less' : 'more', media.type.split(' ')[0].toLowerCase()]">
+               <h3>{{ media.title }}</h3>
+               <div v-show="media.showDetail">
+                  <p>{{ media.description }}</p>
+                  <p v-if="media.contributor" class="byline">By: {{ media.contributor }}</p>
+               </div>
+            </li
+            >
+         </ul>
+      </div>
+   </div>
+
+   <script src="../../vue.js"></script>
+   <script src="app.js"></script>
+</body>
+</html>
